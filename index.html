@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meemo's Naturals — Nourishing Wellness Naturally</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ═══════════════════════════════════════════
+       TOKENS & RESET
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:      #0e120d;
+      --forest:   #1b3a1b;
+      --sage:     #3d6b3d;
+      --moss:     #6b9e6b;
+      --mist:     #c8dcc8;
+      --parchment:#f7f2e8;
+      --cream:    #fdfaf4;
+      --gold:     #b8941f;
+      --gold-lt:  #d4ac35;
+      --white:    #ffffff;
+      --rule:     rgba(14,18,13,.12);
+
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'Jost', system-ui, sans-serif;
+
+      --ease:     cubic-bezier(.22,.61,.36,1);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ═══════════════════════════════════════════
+       UTILITY
+    ═══════════════════════════════════════════ */
+    .u-container { max-width: 1340px; margin: 0 auto; padding: 0 5%; }
+    .u-serif { font-family: var(--serif); }
+    .u-rule { height: 1px; background: var(--rule); }
+    .u-tag {
+      font-family: var(--sans); font-size: .68rem; font-weight: 500;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+    }
+
+    /* ═══════════════════════════════════════════
+       MARQUEE TICKER
+    ═══════════════════════════════════════════ */
+    .ticker {
+      background: var(--forest); color: var(--parchment);
+      padding: .55rem 0; overflow: hidden;
+      font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    }
+    .ticker-track {
+      display: flex; gap: 4rem;
+      animation: ticker 28s linear infinite;
+      width: max-content;
+    }
+    .ticker-track span { white-space: nowrap; }
+    .ticker-track span::before { content: '✦'; margin-right: 1.8rem; color: var(--gold); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ═══════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      transition: background .4s var(--ease), box-shadow .4s var(--ease);
+    }
+    .nav.scrolled {
+      background: rgba(253,250,244,.96);
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      box-shadow: 0 1px 0 var(--rule);
+    }
+    .nav-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 1.4rem 5%;
+      max-width: 100%;
+    }
+    .nav-left {
+      display: flex; gap: 2.2rem; align-items: center;
+    }
+    .nav-left a {
+      font-size: .72rem; font-weight: 500; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--forest);
+      position: relative; padding-bottom: 2px;
+    }
+    .nav-left a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 100%;
+      height: 1px; background: var(--gold);
+      transition: right .3s var(--ease);
+    }
+    .nav-left a:hover::after { right: 0; }
+    .nav-logo {
+      text-align: center;
+    }
+    .nav-logo-wordmark {
+      font-family: var(--serif); font-size: 1.55rem; font-weight: 600;
+      color: var(--forest); letter-spacing: .04em; line-height: 1;
+    }
+    .nav-logo-sub {
+      font-size: .58rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--gold); margin-top: .15rem;
+    }
+    .nav-right {
+      display: flex; justify-content: flex-end; align-items: center; gap: 1.2rem;
+    }
+    .nav-btn {
+      font-size: .7rem; font-weight: 500; letter-spacing: .15em;
+      text-transform: uppercase; padding: .6rem 1.4rem;
+      border: 1px solid var(--forest); color: var(--forest);
+      border-radius: 0; cursor: pointer;
+      transition: background .25s, color .25s;
+    }
+    .nav-btn:hover, .nav-btn.primary {
+      background: var(--forest); color: var(--cream);
+    }
+    .nav-btn.wa {
+      background: #25D366; color: #fff; border-color: #25D366;
+    }
+    .nav-btn.wa:hover { background: #1ab558; border-color: #1ab558; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      border: none; background: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--forest); transition: all .3s;
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding-top: 5.5rem;
+      background: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .hero-stage {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      align-items: end;
+      padding: 4rem 5% 0;
+      gap: 2rem;
+      max-width: 1340px; margin: 0 auto; width: 100%;
+    }
+    .hero-col-left {
+      padding-bottom: 6rem;
+    }
+    .hero-eyebrow {
+      font-size: .68rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.6rem;
+    }
+    .hero-stat-block { margin-bottom: 2.5rem; }
+    .hero-stat-num {
+      font-family: var(--serif); font-size: 4.5rem; font-weight: 300;
+      line-height: .9; color: var(--forest);
+    }
+    .hero-stat-lbl {
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink); opacity: .5; margin-top: .4rem;
+    }
+    .hero-divider {
+      width: 32px; height: 1px; background: var(--gold); margin: 1.8rem 0;
+    }
+    .hero-desc {
+      font-size: .82rem; line-height: 1.85;
+      color: var(--ink); opacity: .65; max-width: 200px;
+    }
+    .hero-center { text-align: center; position: relative; }
+    .hero-headline-wrap { margin-bottom: 2rem; }
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(4.5rem, 10vw, 9rem);
+      font-weight: 300; line-height: .92;
+      color: var(--forest); letter-spacing: -.01em;
+    }
+    .hero-headline em {
+      font-style: italic; color: var(--gold);
+    }
+    .hero-cta-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2rem; margin-bottom: 3rem;
+    }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: .7rem;
+      font-size: .72rem; font-weight: 500; letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .9rem 2.2rem;
+      background: var(--forest); color: var(--cream);
+      border: 1px solid var(--forest);
+      cursor: pointer;
+      transition: background .25s, color .25s, transform .2s;
+    }
+    .btn-gold:hover { background: var(--sage); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: .7rem;
+      font-size: .72rem; font-weight: 500; letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .9rem 2.2rem;
+      background: transparent; color: var(--forest);
+      border: 1px solid var(--forest);
+      cursor: pointer;
+      transition: background .25s, color .25s, transform .2s;
+    }
+    .btn-outline:hover { background: var(--forest); color: var(--cream); transform: translateY(-1px); }
+    .btn-wa-hero {
+      display: inline-flex; align-items: center; gap: .7rem;
+      font-size: .72rem; font-weight: 500; letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .9rem 2.2rem;
+      background: #25D366; color: #fff;
+      border: 1px solid #25D366;
+      cursor: pointer;
+      transition: background .25s, transform .2s;
+    }
+    .btn-wa-hero:hover { background: #1ab558; transform: translateY(-1px); }
+    .hero-scroll-line {
+      font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--ink); opacity: .35;
+      display: flex; align-items: center; gap: .8rem;
+      justify-content: center;
+    }
+    .hero-scroll-line::before, .hero-scroll-line::after {
+      content: ''; flex: 1; max-width: 60px; height: 1px; background: currentColor;
+    }
+
+    /* Hero visual panels */
+    .hero-panels {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      height: clamp(300px, 42vw, 560px);
+    }
+    .hero-panel {
+      border-radius: 0; overflow: hidden; position: relative;
+      cursor: pointer;
+    }
+    .hero-panel-bg {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 1.8rem;
+      transition: transform .6s var(--ease);
+    }
+    .hero-panel:hover .hero-panel-bg { transform: scale(1.04); }
+    .hp1 { background: linear-gradient(160deg, #ff6b1a 0%, #e8a020 45%, #f5d060 100%); }
+    .hp2 { background: linear-gradient(160deg, #7b1e3e 0%, #c0303a 55%, #e8584a 100%); }
+    .hero-panel-label {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 300;
+      color: rgba(255,255,255,.95); line-height: 1.1;
+    }
+    .hero-panel-sub {
+      font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(255,255,255,.65); margin-top: .3rem;
+    }
+    .hero-panel-num {
+      position: absolute; top: 1.2rem; right: 1.4rem;
+      font-family: var(--serif); font-size: 3.5rem; font-weight: 300;
+      color: rgba(255,255,255,.15); line-height: 1;
+    }
+
+    /* Hero col right */
+    .hero-col-right {
+      padding-bottom: 6rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      align-items: flex-end;
+    }
+    .hero-since {
+      writing-mode: vertical-rl;
+      font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--ink); opacity: .35;
+      margin-bottom: 2rem;
+    }
+    .hero-location {
+      text-align: right;
+    }
+    .hero-location-name {
+      font-family: var(--serif); font-size: 1.1rem; font-weight: 300;
+      color: var(--forest);
+    }
+    .hero-location-detail {
+      font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--ink); opacity: .45; margin-top: .3rem;
+    }
+
+    /* Hero footer strip */
+    .hero-strip {
+      display: flex; align-items: stretch;
+      border-top: 1px solid var(--rule);
+    }
+    .hero-strip-item {
+      flex: 1; padding: 1.4rem 5%;
+      border-right: 1px solid var(--rule);
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hero-strip-item:last-child { border-right: none; }
+    .strip-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .strip-title {
+      font-family: var(--serif); font-size: 1rem; font-weight: 400;
+      color: var(--forest);
+    }
+    .strip-sub {
+      font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink); opacity: .45; margin-top: .1rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       MANIFESTO BAND
+    ═══════════════════════════════════════════ */
+    .manifesto {
+      background: var(--forest); padding: 7rem 5%;
+      position: relative; overflow: hidden;
+    }
+    .manifesto::before {
+      content: '"';
+      font-family: var(--serif); font-size: 40rem; font-weight: 300;
+      color: rgba(255,255,255,.03);
+      position: absolute; top: -8rem; left: -2rem;
+      line-height: 1; pointer-events: none;
+    }
+    .manifesto-inner {
+      max-width: 1340px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 2fr; gap: 5rem;
+      align-items: center;
+    }
+    .manifesto-left .u-tag { color: var(--gold); margin-bottom: 1.2rem; display: block; }
+    .manifesto-left p {
+      font-size: .82rem; line-height: 1.9;
+      color: rgba(255,255,255,.5);
+    }
+    .manifesto-quote {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4.5vw, 3.8rem);
+      font-weight: 300; line-height: 1.25;
+      color: var(--parchment);
+    }
+    .manifesto-quote em {
+      font-style: italic; color: var(--gold);
+    }
+    .manifesto-rule {
+      width: 48px; height: 1px; background: var(--gold); margin-top: 2.5rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       PRODUCTS SECTION
+    ═══════════════════════════════════════════ */
+    .products { padding: 8rem 0; }
+    .products-header {
+      max-width: 1340px; margin: 0 auto; padding: 0 5%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: end; margin-bottom: 4rem;
+    }
+    .products-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 300; line-height: 1.05; color: var(--forest);
+    }
+    .products-header h2 em { font-style: italic; }
+    .products-header-right p {
+      font-size: .85rem; line-height: 1.9; color: var(--ink); opacity: .6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* MVC Grid: master table layout */
+    .products-mvc {
+      max-width: 1340px; margin: 0 auto; padding: 0 5%;
+    }
+    .mvc-table { width: 100%; border-collapse: collapse; }
+    .mvc-table thead tr {
+      border-bottom: 1px solid var(--rule);
+    }
+    .mvc-table thead th {
+      font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--ink); opacity: .4; font-weight: 500;
+      padding: .8rem 0; text-align: left;
+    }
+    .mvc-table thead th:last-child { text-align: right; }
+    .mvc-row {
+      border-bottom: 1px solid var(--rule);
+      transition: background .2s;
+      cursor: pointer;
+    }
+    .mvc-row:hover { background: rgba(107,158,107,.06); }
+    .mvc-row td { padding: 1.8rem 0; vertical-align: middle; }
+    .mvc-num {
+      font-family: var(--serif); font-size: 1rem; font-weight: 300;
+      color: var(--ink); opacity: .3; width: 3rem;
+    }
+    .mvc-icon-cell { width: 4.5rem; }
+    .mvc-icon-wrap {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .ic1{background:linear-gradient(135deg,#ffe3b0,#ffc870)}.ic2{background:linear-gradient(135deg,#c8e6c8,#8bc88b)}
+    .ic3{background:linear-gradient(135deg,#fff3b0,#ffe066)}.ic4{background:linear-gradient(135deg,#ffe5c0,#f0b87a)}
+    .ic5{background:linear-gradient(135deg,#fde0e0,#f4a0a0)}.ic6{background:linear-gradient(135deg,#e0d4f0,#c4a8e8)}
+    .ic7{background:linear-gradient(135deg,#ffebd0,#f8c080)}.ic8{background:linear-gradient(135deg,#ffd6e8,#f4a0c0)}
+    .mvc-name {
+      font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
+      color: var(--forest);
+    }
+    .mvc-desc {
+      font-size: .78rem; color: var(--ink); opacity: .5; margin-top: .2rem;
+    }
+    .mvc-tags { display: flex; gap: .4rem; flex-wrap: wrap; }
+    .mvc-pill {
+      font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;
+      padding: .25rem .7rem;
+      border: 1px solid var(--rule); color: var(--ink); opacity: .55;
+      border-radius: 0;
+    }
+    .mvc-action { text-align: right; }
+    .mvc-inquiry {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      padding: .65rem 1.4rem;
+      border: 1px solid var(--forest); color: var(--forest);
+      cursor: pointer; transition: background .2s, color .2s;
+    }
+    .mvc-inquiry:hover { background: var(--forest); color: var(--cream); }
+    .mvc-inquiry-wa {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      padding: .65rem 1.4rem;
+      background: #25D366; border: 1px solid #25D366; color: #fff;
+      cursor: pointer; transition: background .2s;
+      margin-left: .6rem;
+    }
+    .mvc-inquiry-wa:hover { background: #1ab558; }
+
+    /* ═══════════════════════════════════════════
+       CARDS GRID (alternate view)
+    ═══════════════════════════════════════════ */
+    .cards-grid {
+      max-width: 1340px; margin: 4rem auto 0; padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--rule);
+    }
+    .card {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      position: relative; overflow: hidden;
+      transition: background .3s;
+    }
+    .card:hover { background: var(--parchment); }
+    .card:nth-child(4n) { border-right: none; }
+    .card-num {
+      font-family: var(--serif); font-size: 5rem; font-weight: 300;
+      color: var(--rule); line-height: 1;
+      position: absolute; top: 1rem; right: 1.2rem;
+      transition: color .3s;
+    }
+    .card:hover .card-num { color: rgba(107,158,107,.2); }
+    .card-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+    .card-title {
+      font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
+      color: var(--forest); margin-bottom: .5rem;
+    }
+    .card-text { font-size: .78rem; line-height: 1.75; color: var(--ink); opacity: .55; }
+
+    /* ═══════════════════════════════════════════
+       WHY SECTION
+    ═══════════════════════════════════════════ */
+    .why {
+      padding: 8rem 0;
+      background: var(--parchment);
+    }
+    .why-inner {
+      max-width: 1340px; margin: 0 auto; padding: 0 5%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+    }
+    .why-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .why-tile {
+      background: var(--cream);
+      aspect-ratio: 1;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 1.6rem;
+      position: relative; overflow: hidden;
+    }
+    .why-tile-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; opacity: .08;
+      pointer-events: none;
+    }
+    .why-tile-num {
+      font-family: var(--serif); font-size: .85rem; font-weight: 300;
+      color: var(--gold); margin-bottom: .4rem;
+    }
+    .why-tile-title {
+      font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
+      color: var(--forest);
+    }
+    .why-tile-text {
+      font-size: .72rem; color: var(--ink); opacity: .55; line-height: 1.65;
+      margin-top: .3rem;
+    }
+    .why-content .u-tag { display: block; margin-bottom: 1.2rem; }
+    .why-content h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-weight: 300; color: var(--forest);
+      line-height: 1.1; margin-bottom: 2rem;
+    }
+    .why-content h2 em { font-style: italic; }
+    .why-list { list-style: none; margin-bottom: 2.5rem; }
+    .why-list li {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 0; border-bottom: 1px solid var(--rule);
+    }
+    .why-list li:last-child { border-bottom: none; }
+    .why-list-check {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--mist); color: var(--forest);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; flex-shrink: 0; margin-top: .1rem;
+    }
+    .why-list-text { font-size: .82rem; line-height: 1.7; color: var(--ink); opacity: .7; }
+    .why-list-text strong { color: var(--forest); font-weight: 600; opacity: 1; }
+
+    /* ═══════════════════════════════════════════
+       CONTACT SECTION
+    ═══════════════════════════════════════════ */
+    .contact { padding: 8rem 0; background: var(--cream); }
+    .contact-inner {
+      max-width: 1340px; margin: 0 auto; padding: 0 5%;
+    }
+    .contact-top {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      margin-bottom: 5rem; align-items: end;
+    }
+    .contact-top h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 300; color: var(--forest); line-height: 1.0;
+    }
+    .contact-top h2 em { font-style: italic; color: var(--gold); }
+    .contact-top p {
+      font-size: .85rem; line-height: 1.9; color: var(--ink); opacity: .6;
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--rule);
+    }
+    .contact-card {
+      padding: 2.5rem 2rem; border-right: 1px solid var(--rule);
+      display: flex; flex-direction: column; gap: .7rem;
+      text-decoration: none; color: inherit;
+      transition: background .25s;
+    }
+    .contact-card:last-child { border-right: none; }
+    .contact-card:hover { background: var(--parchment); }
+    .contact-card-icon {
+      font-size: 1.6rem; margin-bottom: .5rem;
+    }
+    .contact-card-type {
+      font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .contact-card-value {
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 400;
+      color: var(--forest);
+    }
+    .contact-card-action {
+      font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--ink); opacity: .4; margin-top: auto; padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .contact-card-action::after { content: '→'; }
+    .contact-map {
+      margin-top: 3rem;
+      background: var(--parchment);
+      border: 1px solid var(--rule);
+      height: 260px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-map-bg {
+      position: absolute; inset: 0;
+      display: grid; grid-template-columns: repeat(10, 1fr);
+      grid-template-rows: repeat(4, 1fr); opacity: .04;
+    }
+    .contact-map-bg div { border: 1px solid var(--ink); }
+    .contact-map-content {
+      text-align: center; position: relative; z-index: 1;
+    }
+    .contact-map-pin { font-size: 3rem; margin-bottom: .8rem; }
+    .contact-map-name {
+      font-family: var(--serif); font-size: 1.5rem; font-weight: 300;
+      color: var(--forest);
+    }
+    .contact-map-addr {
+      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--ink); opacity: .45; margin-top: .3rem;
+    }
+    .contact-map-link {
+      display: inline-block; margin-top: 1.2rem;
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      padding: .65rem 1.6rem; border: 1px solid var(--forest); color: var(--forest);
+      cursor: pointer; transition: background .2s, color .2s;
+    }
+    .contact-map-link:hover { background: var(--forest); color: var(--cream); }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,.55);
+      padding: 5rem 5% 2.5rem;
+    }
+    .footer-inner {
+      max-width: 1340px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+      padding-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .footer-brand-name {
+      font-family: var(--serif); font-size: 1.8rem; font-weight: 300;
+      color: #fff; margin-bottom: .3rem;
+    }
+    .footer-brand-sub {
+      font-size: .6rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .footer-brand-desc {
+      font-size: .78rem; line-height: 1.85; margin-bottom: 1.5rem;
+      max-width: 280px;
+    }
+    .footer-phone {
+      font-family: var(--serif); font-size: 1.3rem; font-weight: 300;
+      color: rgba(255,255,255,.8);
+    }
+    .footer-col-title {
+      font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: .7rem; }
+    .footer-col ul li a {
+      font-size: .8rem; color: rgba(255,255,255,.45);
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom {
+      max-width: 1340px; margin: 2rem auto 0;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom-left {
+      font-size: .68rem; letter-spacing: .12em;
+    }
+    .footer-bottom-right {
+      font-size: .68rem; letter-spacing: .12em; color: var(--gold);
+    }
+
+    /* ═══════════════════════════════════════════
+       FLOATING WA
+    ═══════════════════════════════════════════ */
+    .float-wa {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 800;
+      width: 52px; height: 52px;
+      background: #25D366; color: #fff;
+      border-radius: 0;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,.18);
+      transition: transform .25s var(--ease);
+    }
+    .float-wa:hover { transform: translateY(-3px); }
+    .float-wa svg { width: 24px; height: 24px; fill: #fff; }
+
+    /* ═══════════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════════ */
+    [data-reveal] {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .8s var(--ease), transform .8s var(--ease);
+    }
+    [data-reveal].visible { opacity: 1; transform: translateY(0); }
+    [data-reveal="delay-1"] { transition-delay: .1s; }
+    [data-reveal="delay-2"] { transition-delay: .2s; }
+    [data-reveal="delay-3"] { transition-delay: .3s; }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .hero-stage { grid-template-columns: 1fr; }
+      .hero-col-left, .hero-col-right { display: none; }
+      .hero-center { padding: 2rem 0; }
+      .manifesto-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .products-header { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: 1fr 1fr; }
+      .why-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-top { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+      .contact-card:nth-child(2) { border-right: none; }
+      .contact-card:nth-child(3) { border-right: 1px solid var(--rule); border-top: 1px solid var(--rule); }
+      .contact-card:nth-child(4) { border-right: none; border-top: 1px solid var(--rule); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-left, .nav-right .nav-btn:first-child { display: none; }
+      .hamburger { display: flex; }
+      .hero-headline { font-size: 3.8rem; }
+      .hero-strip { flex-wrap: wrap; }
+      .hero-strip-item { min-width: 50%; border-bottom: 1px solid var(--rule); }
+      .mvc-table { display: none; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .card:nth-child(4n) { border-right: 1px solid var(--rule); }
+      .card { border-right: 1px solid var(--rule); }
+      .why-visual { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-card { border-right: none; border-bottom: 1px solid var(--rule); }
+      .contact-card:last-child { border-bottom: none; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .hero-cta-row { flex-direction: column; }
+    }
+
+    /* Skip link (keyboard accessibility) */
+    .skip-link {
+      position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+    }
+    .skip-link:focus {
+      position: fixed; left: 1rem; top: 1rem; width: auto; height: auto; padding: .6rem 1rem;
+      background: var(--forest); color: var(--cream); z-index: 1200; border-radius: 4px; text-decoration: none;
+      box-shadow: 0 4px 18px rgba(0,0,0,.18);
+    }
+
+    /* Theme toggle appearance */
+    #themeToggle { font-size: 1rem; padding: .5rem .8rem; }
+
+    /* Dark theme variable overrides */
+    [data-theme="dark"] {
+      --ink: #e8f6e8;
+      --forest: #80b280;
+      --sage: #6ea66e;
+      --moss: #5a8e5a;
+      --mist: #234023;
+      --parchment: #071007;
+      --parchment: #071007;
+      --parchment: #071007;
+      --parchment: #071007;
+      --parchment: #071007;
+      --parchment: #071007;
+      --cream: #071007;
+      --white: #0b120b;
+      --rule: rgba(255,255,255,.06);
+      background-color: var(--cream);
+    }
+
+    /* Tweaks for elements in dark mode */
+    [data-theme="dark"] body { background: var(--cream); color: var(--ink); }
+    [data-theme="dark"] footer { background: #062006; color: rgba(255,255,255,.6); }
+    [data-theme="dark"] .nav.scrolled { background: rgba(7,16,7,.9); box-shadow: 0 1px 0 rgba(255,255,255,.03); }
+  </style>
+</head>
+  <body>
+    <!-- Skip link for keyboard users -->
+    <a class="skip-link" href="#products">Skip to products</a>
+
+<!-- TICKER -->
+<div style="position:fixed;top:0;left:0;right:0;z-index:1000">
+  <div class="ticker" id="ticker">
+    <div class="ticker-track" id="tickerTrack">
+      <span>Fresh Juices</span><span>Pure Honey</span><span>Wellness Shots</span>
+      <span>Granola</span><span>Smoothies</span><span>Gluten-Free Flour</span>
+      <span>Nuts &amp; Seeds</span><span>Hibiscus Drinks</span><span>Kitengela</span>
+      <span>0742 446 691</span><span>Nourishing Wellness Naturally</span>
+      <span>Fresh Juices</span><span>Pure Honey</span><span>Wellness Shots</span>
+      <span>Granola</span><span>Smoothies</span><span>Gluten-Free Flour</span>
+      <span>Nuts &amp; Seeds</span><span>Hibiscus Drinks</span><span>Kitengela</span>
+      <span>0742 446 691</span><span>Nourishing Wellness Naturally</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav" style="top:2rem">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="#products">Products</a>
+      <a href="#why">Our Story</a>
+      <a href="#contact">Visit Us</a>
+    </div>
+    <div class="nav-logo">
+      <div class="nav-logo-wordmark">Meemo's Naturals</div>
+      <div class="nav-logo-sub">Kitengela · Est. Nourishing Wellness</div>
+    </div>
+    <div class="nav-right">
+      <a href="tel:+254742446691" class="nav-btn">0742 446 691</a>
+      <a href="https://wa.me/254742446691?text=Hello%20Meemo's%20Naturals!%20I'd%20like%20to%20inquire." target="_blank" class="nav-btn wa">WhatsApp</a>
+      <!-- Theme toggle: toggles light / dark, persisted to localStorage -->
+      <button id="themeToggle" class="nav-btn" aria-pressed="false" title="Toggle dark mode">🌙</button>
+    </div>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:6.5rem">
+  <div class="hero-stage">
+
+    <!-- LEFT COL -->
+    <div class="hero-col-left" data-reveal>
+      <div class="hero-eyebrow">Kitengela · Kenya</div>
+      <div class="hero-stat-block">
+        <div class="hero-stat-num">453</div>
+        <div class="hero-stat-lbl">Happy Customers</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat-block">
+        <div class="hero-stat-num">20+</div>
+        <div class="hero-stat-lbl">Product Varieties</div>
+      </div>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">Pure. Honest. Fresh. Made daily from nature's finest ingredients — nothing artificial, ever.</p>
+    </div>
+
+    <!-- CENTER -->
+    <div class="hero-center">
+      <div class="hero-headline-wrap" data-reveal>
+        <h1 class="hero-headline">
+          Nourish&shy;ing<br><em>Wellness</em><br>Naturally
+        </h1>
+      </div>
+      <div class="hero-cta-row" data-reveal="delay-1">
+        <a href="#products" class="btn-gold">Explore Products</a>
+        <a href="https://wa.me/254742446691?text=Hello!%20I'd%20like%20to%20place%20an%20inquiry%20with%20Meemo's%20Naturals." target="_blank" class="btn-wa-hero">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order via WhatsApp
+        </a>
+        <a href="tel:+254742446691" class="btn-outline">Call Now</a>
+      </div>
+      <div class="hero-panels" data-reveal="delay-2">
+        <div class="hero-panel">
+          <div class="hero-panel-bg hp1">
+            <span class="hero-panel-num">01</span>
+            <div class="hero-panel-label">Fresh<br>Juices</div>
+            <div class="hero-panel-sub">Cold-pressed daily</div>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="hero-panel-bg hp2">
+            <span class="hero-panel-num">02</span>
+            <div class="hero-panel-label">Zobo<br>Bliss</div>
+            <div class="hero-panel-sub">Hibiscus perfection</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-scroll-line" style="margin-top:1.8rem" data-reveal="delay-3">Scroll to explore</div>
+    </div>
+
+    <!-- RIGHT COL -->
+    <div class="hero-col-right" data-reveal>
+      <div class="hero-since">Nourishing · Wellness · Naturally</div>
+      <div class="hero-location">
+        <div class="hero-location-name">Quiver Business Park</div>
+        <div class="hero-location-detail">Kitengela · Kajiado County · Kenya</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HERO STRIP -->
+  <div class="hero-strip">
+    <div class="hero-strip-item">
+      <span class="strip-icon">🥤</span>
+      <div>
+        <div class="strip-title">Fresh Juices & Smoothies</div>
+        <div class="strip-sub">Made to order, daily</div>
+      </div>
+    </div>
+    <div class="hero-strip-item">
+      <span class="strip-icon">🍯</span>
+      <div>
+        <div class="strip-title">Raw Honey & Granola</div>
+        <div class="strip-sub">Unprocessed & natural</div>
+      </div>
+    </div>
+    <div class="hero-strip-item">
+      <span class="strip-icon">🌾</span>
+      <div>
+        <div class="strip-title">Gluten-Free Flour</div>
+        <div class="strip-sub">Nutritious baking blends</div>
+      </div>
+    </div>
+    <div class="hero-strip-item">
+      <span class="strip-icon">📍</span>
+      <div>
+        <div class="strip-title">Kitengela · Quiver Park</div>
+        <div class="strip-sub">0742 446 691</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <div class="manifesto-left" data-reveal>
+      <span class="u-tag">Our Philosophy</span>
+      <p>Every product at Meemo's Naturals begins with a single question: would nature approve? We source purely, blend honestly, and serve with purpose.</p>
+    </div>
+    <div data-reveal="delay-1">
+      <blockquote class="manifesto-quote">
+        "What you put into your body<br>shapes the life <em>you live.</em><br>Choose naturally."
+      </blockquote>
+      <div class="manifesto-rule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS: MVC TABLE + CARDS -->
+<section class="products" id="products">
+  <div class="products-header" data-reveal>
+    <div>
+      <span class="u-tag" style="display:block;margin-bottom:.8rem">Our Range</span>
+      <h2>Everything<br><em>Naturally</em> Good</h2>
+    </div>
+    <div class="products-header-right">
+      <p>From cold-pressed juices and immunity shots to raw honey and gluten-free flour — all made with care, no shortcuts. Inquire via WhatsApp or call for any product.</p>
+      <a href="https://wa.me/254742446691?text=Hello%20Meemo's!%20I'd%20like%20a%20full%20product%20list." target="_blank" class="btn-gold">Full Product Inquiry</a>
+    </div>
+  </div>
+
+  <!-- TABLE VIEW (desktop) -->
+  <div class="products-mvc" data-reveal>
+    <table class="mvc-table">
+      <thead>
+        <tr>
+          <th style="width:2.5rem">#</th>
+          <th style="width:4.5rem"></th>
+          <th>Product</th>
+          <th>Notes</th>
+          <th style="text-align:right">Inquire</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="mvc-row" onclick="window.open('https://wa.me/254742446691?text=Hi!%20I%20want%20to%20inquire%20about%20Fresh%20Juices.','_blank')">
+          <td class="mvc-num">01</td>
+          <td class="mvc-icon-cell"><div class="mvc-icon-wrap ic1">🥤</div></td>
+          <td><div class="mvc-name">Fresh Juices</div><div class="mvc-desc">Mango, Passion, Tropical Sunrise, Orange & more</div></td>
+          <td><div class="mvc-tags"><span class="mvc-pill">Cold-pressed</span><span class="mvc-pill">No preservatives</span><span class="mvc-pill">Daily fresh</span></div></td>
+          <td class="mvc-action">
+            <a href="https://wa.me/254742446691?text=Hi!%20I%20want%20to%20inquire%20about%20Fresh%20Juices." target="_blank" class="mvc-inquiry" onclick="event.stopPropagation()">Inquire</a>
+            <a href="https://wa.me/254742446691?text=Hi!%20I%20want%20to%20inquire%20about%20Fresh%20Juices." target="_blank" class="mvc-inquiry-wa" onclick="event.stopPropagation()">WA</a>
+          </td>
+        </tr>
+        <tr class="mvc-row" onclick="window.open('https://wa.me/254742446691?text=Hi!%20I%20want%20to%20inquire%20about%20Smoothies.','_blank')">
+          <td class="mvc-num">02</td>
+          <td class="mvc-icon-cell"><div class="mvc-icon-wrap ic2">🥬</div></td>
+          <td><div class="mvc-name">Smoothies</div><div class="mvc-desc">Avocado, Strawberry, Green, Dairy-free blends</div></td>
+          <td><div class="mvc-tags"><span class="mvc-pill">Dairy-free</span><span class="mvc-pill">High protein</span><span class="mvc-pill">Blended fresh</span></div></td>
+          <td class="mvc-action">
+            <a href="https://wa.me/254742446691?text=Hi!%20Smoothies%20inquiry." target="_blank" class="mvc-inquiry" onclick="event.stopPropagation()">Inquire</a>
+            <a href="https://wa.me/254742446691?text=Hi!%20Smoothies%20inquiry." target="_blank" class="mvc-inquiry-wa" onclick="event.stopPropagation()">WA</a>
+          </td>
+        </tr>
+        <tr class="mvc-row" onclick="window.open('https://wa.me/254742446691?text=Hi!%20I%20want%20to%20inquire%20about%20Wellness%20Shots.','_blank')">
+          <td class="mvc-num">03</td>
+          <td class="mvc-icon-cell"><div class="mvc-icon-wrap ic3">⚡</div></td>
+          <td><div class="mvc-name">Wellness Shots</div><div class="mvc-desc">Turmeric, Ginger, Beetroot, Aloe Vera</div></td>
+          <td><div class="mvc-tags"><span class="mvc-pill">Immunity boost</span><span class="mvc-pill">Anti-inflammatory</span></div></td>
+          <td class="mvc-action">
+            <a href="https://wa.me/254742446691?text=Hi!%20Wellness%20Shots%20inquiry." target="_blank" class="mvc-inquiry" onclick="event.stopPropagation()">Inquire</a>
+            <a href="https://wa.me/254742446691?text=Hi!%20Wellness%20Shots%20inquiry." target="_blank" class="mvc-inquiry-wa" onclick="event.stopPropagation()">WA</a>
+          </td>
+        </tr>
+        <tr class="mvc-row" onclick="window.open('https://wa.me/254742446691?text=Hi!%20I%20want%20to%20inquire%20about%20Pure%20Honey.','_blank')">
+          <td class="mvc-num">04</td>
+          <td class="mvc-icon-cell"><div class="mvc-icon-wrap ic4">🍯</div></td>
+          <td><div class="mvc-name">Pure Honey</div><div class="mvc-desc">Raw, unprocessed, sourced from natural hives</div></td>
+          <td><div class="mvc-tags"><span class="mvc-pill">Raw</span><span class="mvc-pill">Unprocessed</span><span class="mvc-pill">Natural</span></div></td>
+          <td class="mvc-action">
+            <a href="https://wa.me/254742446691?text=Hi!%20Pure%20Honey%20inquiry." target="_blank" class="mvc-inquiry" onclick="event.stopPropagation()">Inquire</a>
+            <a href="https://wa.me/254742446691?text=Hi!%20Pure%20Honey%20inquiry." target="_blank" class="mvc-inquiry-wa" onclick="event.stopPropagation()">WA</a>
+          </td>
+        </tr>
+        <tr class="mvc-row" onclick="window.open('https://wa.me/254742446691?text=Hi!%20I%20want%20to%20inquire%20about%20Granola.','_blank')">
+          <td class="mvc-num">05</td>
+          <td class="mvc-icon-cell"><div class="mvc-icon-wrap ic5">🌾</div></td>
+          <td><div class="mvc-name">Granola</div><div class="mvc-desc">Rolled oats, nuts, seeds, natural honey sweetened</div></td>
+          <td><div class="mvc-tags"><span class="mvc-pill">Wholesome</span><span class="mvc-pill">Low sugar</span><span class="mvc-pill">Crunchy</span></div></td>
+          <td class="mvc-action">
+            <a href="https://wa.me/254742446691?text=Hi!%20Granola%20inquiry." target="_blank" class="mvc-inquiry" onclick="event.stopPropagation()">Inquire</a>
+            <a href="https://wa.me/254742446691?text=Hi!%20Granola%20inquiry." target="_blank" class="mvc-inquiry-wa" onclick="event.stopPropagation()">WA</a>
+          </td>
+        </tr>
+        <tr class="mvc-row" onclick="window.open('https://wa.me/254742446691?text=Hi!%20I%20want%20to%20inquire%20about%20Gluten-Free%20Flour.','_blank')">
+          <td class="mvc-num">06</td>
+          <td class="mvc-icon-cell"><div class="mvc-icon-wrap ic6">🫘</div></td>
+          <td><div class="mvc-name">Gluten-Free Flour</div><div class="mvc-desc">Nutritious baking blends, various varieties</div></td>
+          <td><div class="mvc-tags"><span class="mvc-pill">Gluten-free</span><span class="mvc-pill">Baking</span><span class="mvc-pill">Nutritious</span></div></td>
+          <td class="mvc-action">
+            <a href="https://wa.me/254742446691?text=Hi!%20Gluten-Free%20Flour%20inquiry." target="_blank" class="mvc-inquiry" onclick="event.stopPropagation()">Inquire</a>
+            <a href="https://wa.me/254742446691?text=Hi!%20Gluten-Free%20Flour%20inquiry." target="_blank" class="mvc-inquiry-wa" onclick="event.stopPropagation()">WA</a>
+          </td>
+        </tr>
+        <tr class="mvc-row" onclick="window.open('https://wa.me/254742446691?text=Hi!%20I%20want%20to%20inquire%20about%20Nuts%20and%20Seeds.','_blank')">
+          <td class="mvc-num">07</td>
+          <td class="mvc-icon-cell"><div class="mvc-icon-wrap ic7">🥜</div></td>
+          <td><div class="mvc-name">Nuts & Seeds</div><div class="mvc-desc">Premium mixed, roasted or raw, for snacking</div></td>
+          <td><div class="mvc-tags"><span class="mvc-pill">Premium</span><span class="mvc-pill">High protein</span><span class="mvc-pill">Roasted & raw</span></div></td>
+          <td class="mvc-action">
+            <a href="https://wa.me/254742446691?text=Hi!%20Nuts%20and%20Seeds%20inquiry." target="_blank" class="mvc-inquiry" onclick="event.stopPropagation()">Inquire</a>
+            <a href="https://wa.me/254742446691?text=Hi!%20Nuts%20and%20Seeds%20inquiry." target="_blank" class="mvc-inquiry-wa" onclick="event.stopPropagation()">WA</a>
+          </td>
+        </tr>
+        <tr class="mvc-row" onclick="window.open('https://wa.me/254742446691?text=Hi!%20I%20want%20to%20inquire%20about%20Hibiscus%20Drinks.','_blank')">
+          <td class="mvc-num">08</td>
+          <td class="mvc-icon-cell"><div class="mvc-icon-wrap ic8">🌺</div></td>
+          <td><div class="mvc-name">Hibiscus Drinks</div><div class="mvc-desc">Homemade Zobo Bliss, naturally sweetened</div></td>
+          <td><div class="mvc-tags"><span class="mvc-pill">Hibiscus</span><span class="mvc-pill">Natural sweet</span><span class="mvc-pill">Antioxidant</span></div></td>
+          <td class="mvc-action">
+            <a href="https://wa.me/254742446691?text=Hi!%20Hibiscus%20Drinks%20inquiry." target="_blank" class="mvc-inquiry" onclick="event.stopPropagation()">Inquire</a>
+            <a href="https://wa.me/254742446691?text=Hi!%20Hibiscus%20Drinks%20inquiry." target="_blank" class="mvc-inquiry-wa" onclick="event.stopPropagation()">WA</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CARDS VIEW (mobile fallback + supplementary) -->
+  <div class="cards-grid" data-reveal>
+    <div class="card"><span class="card-num">01</span><div class="card-icon">🥤</div><div class="card-title">Fresh Juices</div><div class="card-text">Cold-pressed daily. Mango, Passion, Tropical Sunrise, Orange and seasonal blends.</div></div>
+    <div class="card"><span class="card-num">02</span><div class="card-icon">🥬</div><div class="card-title">Smoothies</div><div class="card-text">Dairy-free, green, avocado, strawberry and high-protein blended fresh to order.</div></div>
+    <div class="card"><span class="card-num">03</span><div class="card-icon">⚡</div><div class="card-title">Wellness Shots</div><div class="card-text">Turmeric, ginger, beetroot and aloe vera immunity-boosting concentrated shots.</div></div>
+    <div class="card"><span class="card-num">04</span><div class="card-icon">🍯</div><div class="card-title">Pure Honey</div><div class="card-text">Raw, unprocessed honey sourced directly from natural hives. Unfiltered goodness.</div></div>
+    <div class="card"><span class="card-num">05</span><div class="card-icon">🌾</div><div class="card-title">Granola</div><div class="card-text">Wholesome rolled oats, premium nuts, seeds and natural honey. Crunchy perfection.</div></div>
+    <div class="card"><span class="card-num">06</span><div class="card-icon">🫘</div><div class="card-title">Gluten-Free Flour</div><div class="card-text">Nutritious naturally gluten-free flour blends for baking, cooking and lifestyle eating.</div></div>
+    <div class="card"><span class="card-num">07</span><div class="card-icon">🥜</div><div class="card-title">Nuts & Seeds</div><div class="card-text">Premium mixed nuts and seeds — perfectly roasted or raw for healthy snacking.</div></div>
+    <div class="card"><span class="card-num">08</span><div class="card-icon">🌺</div><div class="card-title">Hibiscus Drinks</div><div class="card-text">Homemade Zobo Bliss — refreshing, naturally sweetened hibiscus drinks.</div></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="why-inner">
+    <div class="why-visual" data-reveal>
+      <div class="why-tile">
+        <div class="why-tile-bg">🌱</div>
+        <div class="why-tile-num">01 —</div>
+        <div class="why-tile-title">100% Natural</div>
+        <div class="why-tile-text">No artificial flavours, colours or preservatives. Pure honest ingredients.</div>
+      </div>
+      <div class="why-tile">
+        <div class="why-tile-bg">⚡</div>
+        <div class="why-tile-num">02 —</div>
+        <div class="why-tile-title">Made Fresh Daily</div>
+        <div class="why-tile-text">Maximum nutrients, maximum flavour — prepared every day, not stored for weeks.</div>
+      </div>
+      <div class="why-tile">
+        <div class="why-tile-bg">🌾</div>
+        <div class="why-tile-num">03 —</div>
+        <div class="why-tile-title">Gluten-Free Range</div>
+        <div class="why-tile-text">We cater to every body — dedicated gluten-free flour blends and tailored options.</div>
+      </div>
+      <div class="why-tile">
+        <div class="why-tile-bg">💬</div>
+        <div class="why-tile-num">04 —</div>
+        <div class="why-tile-title">Personal Service</div>
+        <div class="why-tile-text">Talk directly to us — every order is personal. No faceless forms, just real conversations.</div>
+      </div>
+    </div>
+    <div class="why-content" data-reveal="delay-1">
+      <span class="u-tag">Why Meemo's</span>
+      <h2>Wellness you can<br>actually <em>trust.</em></h2>
+      <ul class="why-list">
+        <li>
+          <span class="why-list-check">✓</span>
+          <span class="why-list-text"><strong>No shortcuts.</strong> Every product is crafted with intention — what we wouldn't give our own family, we won't give you.</span>
+        </li>
+        <li>
+          <span class="why-list-check">✓</span>
+          <span class="why-list-text"><strong>Transparent sourcing.</strong> We know where our ingredients come from. Ask us anytime.</span>
+        </li>
+        <li>
+          <span class="why-list-check">✓</span>
+          <span class="why-list-text"><strong>Tailored to you.</strong> Dietary needs, custom blends, bulk orders — just ask via WhatsApp.</span>
+        </li>
+        <li>
+          <span class="why-list-check">✓</span>
+          <span class="why-list-text"><strong>Kitengela's finest.</strong> A local brand with a global standard, rooted in our community.</span>
+        </li>
+      </ul>
+      <a href="https://wa.me/254742446691?text=Hello%20Meemo's!%20I'd%20like%20to%20know%20more." target="_blank" class="btn-gold">Start a Conversation</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-top" data-reveal>
+      <h2>Get in<br><em>Touch</em></h2>
+      <div>
+        <p>We don't sell through this website — every inquiry goes directly to us. Call, WhatsApp, or come visit at Quiver Business Park in Kitengela. We'd love to hear from you.</p>
+      </div>
+    </div>
+    <div class="contact-grid" data-reveal>
+      <a href="tel:+254742446691" class="contact-card">
+        <div class="contact-card-icon">📞</div>
+        <div class="contact-card-type">Telephone</div>
+        <div class="contact-card-value">0742 446 691</div>
+        <div class="contact-card-action">Call us directly</div>
+      </a>
+      <a href="https://wa.me/254742446691?text=Hello%20Meemo's%20Naturals!" target="_blank" class="contact-card">
+        <div class="contact-card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="contact-card-type">WhatsApp</div>
+        <div class="contact-card-value">Chat with us</div>
+        <div class="contact-card-action">Open WhatsApp</div>
+      </a>
+      <div class="contact-card" style="cursor:default">
+        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-type">Location</div>
+        <div class="contact-card-value">Quiver Business Park</div>
+        <div class="contact-card-action">Kitengela, Kenya</div>
+      </div>
+      <a href="https://www.tiktok.com/@meemosnaturals" target="_blank" class="contact-card">
+        <div class="contact-card-icon">🎵</div>
+        <div class="contact-card-type">TikTok</div>
+        <div class="contact-card-value">@meemosnaturals</div>
+        <div class="contact-card-action">View our content</div>
+      </a>
+    </div>
+    <div class="contact-map" data-reveal>
+      <div class="contact-map-bg" id="mapGrid"></div>
+      <div class="contact-map-content">
+        <div class="contact-map-pin">📍</div>
+        <div class="contact-map-name">Quiver Business Park</div>
+        <div class="contact-map-addr">Kitengela · Kajiado County · Kenya</div>
+        <a href="https://maps.google.com/?q=Quiver+Business+Park+Kitengela" target="_blank" class="contact-map-link">Open in Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">Meemo's Naturals</div>
+      <div class="footer-brand-sub">Nourishing Wellness Naturally</div>
+      <p class="footer-brand-desc">Pure juices, smoothies, shots, honey, granola and gluten-free flour — crafted daily at Quiver Business Park, Kitengela.</p>
+      <a href="tel:+254742446691" class="footer-phone">0742 446 691</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Products</div>
+      <ul>
+        <li><a href="#products">Fresh Juices</a></li>
+        <li><a href="#products">Smoothies</a></li>
+        <li><a href="#products">Wellness Shots</a></li>
+        <li><a href="#products">Pure Honey</a></li>
+        <li><a href="#products">Granola</a></li>
+        <li><a href="#products">Gluten-Free Flour</a></li>
+        <li><a href="#products">Nuts & Seeds</a></li>
+        <li><a href="#products">Hibiscus Drinks</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Reach Us</div>
+      <ul>
+        <li><a href="tel:+254742446691">📞 0742 446 691</a></li>
+        <li><a href="https://wa.me/254742446691" target="_blank">💬 WhatsApp</a></li>
+        <li><a href="https://www.tiktok.com/@meemosnaturals" target="_blank">🎵 @meemosnaturals</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Visit</div>
+      <ul>
+        <li><a href="#">Quiver Business Park</a></li>
+        <li><a href="#">Kitengela</a></li>
+        <li><a href="#">Kajiado County</a></li>
+        <li><a href="#">Kenya</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-bottom-left">© 2026 Meemo's Naturals. All rights reserved.</span>
+    <span class="footer-bottom-right">Nourishing Wellness Naturally 🌿</span>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/254742446691?text=Hello%20Meemo's%20Naturals!" target="_blank" class="float-wa" title="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // Ticker offset for nav height
+  const tickerEl = document.getElementById('ticker');
+  const navEl = document.getElementById('nav');
+  const tickerH = tickerEl.offsetHeight;
+  navEl.style.top = tickerH + 'px';
+
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => ro.observe(el));
+
+  // Map grid background
+  const mg = document.getElementById('mapGrid');
+  if (mg) { for (let i = 0; i < 40; i++) { const d = document.createElement('div'); mg.appendChild(d); } }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Theme toggle: persist in localStorage and respect prefers-color-scheme
+  (function() {
+    const btn = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const KEY = 'meemos_theme';
+
+    const apply = (theme) => {
+      if (theme === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+        btn.textContent = '☀️';
+        btn.setAttribute('aria-pressed','true');
+      } else {
+        root.removeAttribute('data-theme');
+        btn.textContent = '🌙';
+        btn.setAttribute('aria-pressed','false');
+      }
+    };
+
+    // init
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved) apply(saved);
+      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) apply('dark');
+      else apply('light');
+    } catch (e) { apply('light'); }
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const isDark = root.getAttribute('data-theme') === 'dark';
+        const next = isDark ? 'light' : 'dark';
+        apply(next);
+        try { localStorage.setItem(KEY, next); } catch (e) { }
+      });
+    }
+  })();
+</script>
+</body>
+</html>
